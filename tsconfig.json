@@ -1,0 +1,16 @@
+{
+  "include": ["src"],
+  "exclude": ["dist", "**/*.test.*"],
+	"compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "lib": ["ESNext", "DOM"],
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "verbatimModuleSyntax": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true
+	}
+}

@@ -1,0 +1,38 @@
+{
+  "name": "@samueldavis/tslib",
+  "version": "0.0.0",
+  "description": "A collection of TypeScript Utilities",
+  "type": "module",
+  "sideEffects": false,
+  "private": true,
+  "author": {
+    "name": "Samuel Davis",
+    "email": "samueljakdavis@gmail.com>",
+    "url": "https://github.com/SamuelDavis"
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "clean": "rm --recursive --force dist",
+    "build": "tsc --project tsconfig.json",
+    "test": "vitest run --coverage",
+    "validate": "npm run clean && npm run build && npm run test",
+    "release": "git push --follow-tags",
+    "release:patch": "npm run validate && npm version patch && npm run release",
+    "release:minor": "npm run validate && npm version minor && npm run release",
+    "release:major": "npm run validate && npm version major && npm run release"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^4.0.4",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.4"
+  }
+}
