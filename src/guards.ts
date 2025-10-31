@@ -28,3 +28,25 @@ export function isKeyOf<T extends string | number | symbol>(
 ): value is T {
   return value in other;
 }
+
+export function isFunction<T extends (...args: any[]) => any>(
+  value: unknown | T,
+): value is T {
+  return typeof value === "function";
+}
+export function isString(value: unknown): value is string {
+  return typeof value === "string";
+}
+export function isBoolean(value: unknown): value is boolean {
+  return value === true || value === false;
+}
+export function isArray<T = unknown>(value: T[] | unknown): value is T[] {
+  return Array.isArray(value);
+}
+export function isNumber(value: unknown): value is number {
+  return typeof value === "number" && !Number.isNaN(value);
+}
+export function isDate(value: unknown, cast: boolean = false): value is Date {
+  value = cast ? new Date(value as string) : value;
+  return value instanceof Date && isNumber(value.getTime());
+}

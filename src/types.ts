@@ -1,4 +1,5 @@
 export type AnyRecord<Value = any> = Record<symbol | string | number, Value>;
+export type { Signal, EffectFunction } from "solid-js";
 
 export type Targeted<
   El extends Element = HTMLElement,
