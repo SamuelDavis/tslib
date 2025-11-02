@@ -1,3 +1,5 @@
+import type { ComponentProps, ValidComponent } from "solid-js";
+
 export type AnyRecord<Value = any> = Record<symbol | string | number, Value>;
 export type { Signal, EffectFunction } from "solid-js";
 
@@ -12,8 +14,6 @@ export type ExtendProps<
   Source,
   Extension extends AnyRecord = {},
   Ignore extends string | number | symbol = never,
-> = Source extends (props: infer Props, ...rest: any[]) => any
-  ? ExtendProps<Props, Extension, Ignore>
-  : Source extends AnyRecord
-    ? Omit<Source, keyof Extension | Ignore> & Extension
-    : never;
+> = Source extends ValidComponent
+  ? Omit<ComponentProps<Source>, keyof Extension | Ignore> & Extension
+  : never;
