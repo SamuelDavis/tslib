@@ -2,15 +2,18 @@ export function assert(guard, value, ...args) {
     if (!guard(value, ...args))
         throw new TypeError();
 }
+export function isNonNullable(value) {
+    return value !== null && value !== undefined;
+}
 export function isInstanceOf(value, ctor) {
     return value instanceof ctor;
 }
-export function isValueOf(value, other) {
+export function isOf(value, other) {
     return Array.isArray(other)
         ? other.includes(value)
         : Object.values(other).includes(value);
 }
-export function isKeyOf(value, other) {
+export function isIn(value, other) {
     return value in other;
 }
 export function isFunction(value) {

@@ -6,27 +6,31 @@ export function assert<T, Args extends any[]>(
   if (!guard(value, ...args)) throw new TypeError();
 }
 
-export function isInstanceOf<T>(
+export function isNonNullable<T>(value: T): value is NonNullable<T> {
+  return value !== null && value !== undefined;
+}
+
+export function isInstanceOf<V>(
   value: unknown,
-  ctor: new (...args: any[]) => T,
-): value is T {
+  ctor: new (...args: any[]) => V,
+): value is V {
   return value instanceof ctor;
 }
 
-export function isValueOf<T>(
-  value: any,
+export function isOf<T>(
+  value: unknown,
   other: T[] | Record<string | number | symbol, T>,
 ): value is T {
   return Array.isArray(other)
-    ? other.includes(value)
-    : Object.values(other).includes(value);
+    ? other.includes(value as any)
+    : Object.values(other).includes(value as any);
 }
 
-export function isKeyOf<T extends string | number | symbol>(
-  value: any,
+export function isIn<T extends string | number | symbol>(
+  value: unknown,
   other: Record<T, any>,
 ): value is T {
-  return value in other;
+  return (value as any) in other;
 }
 
 export function isFunction<T extends (...args: any[]) => any>(
